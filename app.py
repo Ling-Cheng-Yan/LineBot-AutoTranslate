@@ -43,7 +43,7 @@ def handle_message(event):
     result = translator.translate(msg)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=result.txt))
+        TextSendMessage(text=result.text))
 
 if __name__ == "__main__":
     app.run()
