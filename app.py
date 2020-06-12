@@ -41,11 +41,11 @@ translator = Translator()
 def handle_message(event):
     msg = event.message.text
     language = translator.detect(msg)
-    if 'lang=ja' in language:
+    if language.scr == 'ja'
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=translator.translate(msg, dest='en')))
-    elif 'lang=zh-tw' in language:
+    elif language.scr == 'zh-tw'
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=translator.translate(msg, dest='en')))
