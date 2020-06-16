@@ -50,16 +50,10 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=result.text))
     else:
-        msg1= [
-            StickerSendMessage(
-                package_id='1',
-                sticker_id='2'
-            ),
-            TextSendMessage(text="Sorry, I can not understand this language.")
-        ]
+        msg1 = [StickerSendMessage(package_id='1', sticker_id='2'), TextSendMessage(text="Sorry, I can not understand this language.")]
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=msg1))
+            msg1)
 
 if __name__ == "__main__":
     app.run()
