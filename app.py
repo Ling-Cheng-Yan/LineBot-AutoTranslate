@@ -40,17 +40,21 @@ translator = Translator()
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    result = translator.translate(msg)
-    if result.src == 'ja':
+    result = translator.detect(msg)
+    if result.lang == 'ja':
         result = translator.translate(msg, dest='en')
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=result.text))
-    elif result.src == 'zh-tw':
+    elif result.lang == 'zh-tw':
         result = translator.translate(msg, dest='ja')
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=result.text))
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="Sorry, I can not understand this language."))
 
 
     line_bot_api.reply_message(
