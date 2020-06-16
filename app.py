@@ -41,6 +41,18 @@ translator = Translator()
 def handle_message(event):
     msg = event.message.text
     result = translator.translate(msg)
+    if result.src == 'ja':
+        result = translator.translate(msg, dest='en')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=result.text))
+    elif result.src == 'zh-tw':
+        result = translator.translate(msg, dest='ja')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=result.text))
+
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=result.text))
