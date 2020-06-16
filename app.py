@@ -6,9 +6,7 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
+from linebot.models import *
 from googletrans import Translator
 
 app = Flask(__name__)
@@ -46,20 +44,22 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=result.text))
-    elif result.lang == 'zh-CN':
+    elif result.lang == 'zh-CN' or result.lang == 'zh-TW':
         result = translator.translate(msg, dest='ja')
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=result.text))
     else:
+        msg1= [
+            StickerSendMessage(
+                package_id='1',
+                sticker_id='2'
+            ),
+            TextSendMessage(text="Sorry, I can not understand this language.")
+        ]
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="Sorry, I can not understand this language."))
-
-
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=result.text))
+            TextSendMessage(text=msg1))
 
 if __name__ == "__main__":
     app.run()
