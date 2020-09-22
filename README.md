@@ -1,1 +1,1 @@
-"# ForYASASHI_LINEBOT" 
+"#LINEBOT_AutoTranslate_ForYASASHI" 
